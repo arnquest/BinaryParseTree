@@ -5,7 +5,7 @@ using System.Text;
 namespace CustomExteions
 {
     using BinaryParse;
-    public static class BTreePrinter
+    public static class PrinterExt
     {
         // This is the extension method.
         public static void Print(this Node root, string textFormat = "0", int spacing = 1, int topMargin = 2, int leftMargin = 2)
@@ -16,7 +16,8 @@ namespace CustomExteions
             var next = root;
             for (int level = 0; next != null; level++)
             {
-                var item = new NodeInfo { Node = next, Text = next.item.ToString(textFormat) };
+                var item = new NodeInfo { Node = next, Text = next.value }; 
+                //var item = new NodeInfo { Node = next, Text = next.item.ToString(textFormat) };
                 if (level < last.Count)
                 {
                     item.StartPos = last[level].EndPos + spacing;

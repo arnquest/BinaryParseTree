@@ -4,7 +4,6 @@ using System.Text;
 
 namespace BinaryParse
 {
-    using CustomExteions;
     public class NodeInfo
     {
         public Node Node;
