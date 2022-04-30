@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BinaryParse
+namespace CustomExteions
 {
+    using BinaryParse;
     public static class BTreePrinter
     {
-        public static void Print(this BNode root, string textFormat = "0", int spacing = 1, int topMargin = 2, int leftMargin = 2)
+        // This is the extension method.
+        public static void Print(this Node root, string textFormat = "0", int spacing = 1, int topMargin = 2, int leftMargin = 2)
         {
             if (root == null) return;
             int firstRoot = Console.CursorTop + topMargin;

@@ -4,9 +4,10 @@ using System.Text;
 
 namespace BinaryParse
 {
+    using CustomExteions;
     public class NodeInfo
     {
-        public BNode Node;
+        public Node Node;
         public string Text;
         public int StartPos;
         public int Size { get { return Text.Length; } }

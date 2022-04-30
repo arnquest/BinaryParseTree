@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+/*Node is part of a tree, it can be sub node or main/root node*/
 namespace BinaryParse
 {
-    public class BNode
+    public class Node
     {
         public int item;
-        public BNode right;
-        public BNode left;
+        public Node right;
+        public Node left;
 
-        public BNode(int item)
+        public Node(int item)
         {
             this.item = item;
         }

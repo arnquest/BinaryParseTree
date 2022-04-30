@@ -4,11 +4,13 @@ using System.Text;
 
 namespace BinaryParse
 {
+    // Import the extension method namespace.
+    using CustomExteions;
     public class BTree
     {
 
-        private BNode _root;
-        public BNode Root {
+        private Node _root;
+        public Node Root {
             get { return _root; } 
         }
         private int _count;
@@ -30,7 +32,7 @@ namespace BinaryParse
         {
             if (_root == null)
             {
-                _root = new BNode(Item);
+                _root = new Node(Item);
                 _count++;
                 return true;
             }
@@ -40,13 +42,13 @@ namespace BinaryParse
             }
         }
 
-        private bool Add_Sub(BNode Node, int Item)
+        private bool Add_Sub(Node Node, int Item)
         {
             if (_comparer.Compare(Node.item, Item) < 0)
             {
                 if (Node.right == null)
                 {
-                    Node.right = new BNode(Item);
+                    Node.right = new Node(Item);
                     _count++;
                     return true;
                 }
@@ -59,7 +61,7 @@ namespace BinaryParse
             {
                 if (Node.left == null)
                 {
-                    Node.left = new BNode(Item);
+                    Node.left = new Node(Item);
                     _count++;
                     return true;
                 }
