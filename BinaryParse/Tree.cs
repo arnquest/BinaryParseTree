@@ -44,7 +44,7 @@ namespace BinaryParse
             _count = 0;
         }
 
-        public bool ConstructTree(string[] expr) 
+        public bool ConstructTree(List<string> expr) 
         {
             // if the expression is empty, we can't construct a tree
             if (expr == null) { return false;}
@@ -55,7 +55,7 @@ namespace BinaryParse
                 string stage = "LeftNode";
                 int numOutput;
 
-                for (int i = 1; i < expr.Length - 2; i++)
+                for (int i = 0; i < expr.Count; i++)
                 {
                     switch (stage)
                     {

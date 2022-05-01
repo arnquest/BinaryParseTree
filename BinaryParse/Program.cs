@@ -11,27 +11,19 @@ namespace BinaryParse
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine("Please enter your expression: ");
+            Console.WriteLine("Please enter your expression: ");
 
-            //char[] expression = Console.ReadLine().ToString().ToCharArray();
-            //string[] expr = Regex.Split(Console.ReadLine().ToString().Trim(), string.Empty);
-            string input = "(2/(4-5))";
-            string[] expr = Regex.Split(input, string.Empty);
-            // Entity expr = Console.ReadLine().Trim().ToString();
-            //Console.WriteLine(expr.EvalNumerical());
+            string input = Console.ReadLine();
 
+            List<string> expr =Helper.ExpressionParser(input);
 
-            Tree btr = new Tree();
-            btr.ConstructTree(expr);
+            int ans = ExpEvaluator.Evaluate(expr);
 
+            Console.WriteLine("Answer for the expression is: " + ans.ToString());
 
-            /*btr.Add(2, "(");
-            btr.Add(1, "3");
-            btr.Add(3, "*");
-            btr.Add(6, "+");
-            btr.Add(4, ")");
-            btr.Add(7, ")");*/
-            btr.Print();            
+            Tree tree = new Tree();
+            tree.ConstructTree(expr);
+            tree.Print();            
         }
         
     }
