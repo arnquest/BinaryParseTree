@@ -13,24 +13,16 @@ namespace BinaryParse
                 /*Bin*/ @"0b[01]+" + "|" +
                 /*Oct*/ @"0[0-7]*" + "|" +
                 /*Dec*/ @"((?!0)|[-+]|(?=0+\.))(\d*\.)?\d+(e\d+)?" +
-                ")$");
+                ")$", RegexOptions.IgnoreCase);
+
         public static bool IsNumeric(string value)
         {
             return _isNumericRegex.IsMatch(value);
         }
-        public static List<string> ExpressionParser(string input)
+        public static int RegexIndexOf(this string str, string pattern)
         {
-            // remove empty space
-            input = input.Replace(" ", "");
-
-            if (input == null) return null;
-
-            List<string> result = new List<string>();
-            foreach (var match in Regex.Matches(input, @"([*+/\-)(])|([0-9.]+|.)"))
-            {
-                result.Add(match.ToString());
-            }
-            return result;
+            var m = Regex.Match(str, pattern);
+            return m.Success ? m.Index : -1;
         }
     }
 }

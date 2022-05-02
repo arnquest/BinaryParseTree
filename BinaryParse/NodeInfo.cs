@@ -4,6 +4,7 @@ using System.Text;
 
 namespace BinaryParse
 {
+    // purpose: for printing use
     public class NodeInfo
     {
         public Node Node;

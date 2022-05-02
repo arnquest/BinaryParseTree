@@ -15,14 +15,14 @@ namespace BinaryParse
 
             string input = Console.ReadLine();
 
-            List<string> expr =Helper.ExpressionParser(input);
-
+            List<string> expr = ExpEvaluator.ExpressionParser(input);
             int ans = ExpEvaluator.Evaluate(expr);
 
             Console.WriteLine("Answer for the expression is: " + ans.ToString());
 
-            Tree tree = new Tree();
-            tree.ConstructTree(expr);
+            TreeParser tree = new TreeParser();
+            tree.ConstructTree(input);
+            
             tree.Print();            
         }
         

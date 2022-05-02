@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BinaryParse
 {
     public class ExpEvaluator
     {
+        static readonly Regex _hasTwoParts =
+            new Regex("\\)\\*\\(|\\)\\+\\(|\\)-\\(|\\)/\\(",
+             RegexOptions.IgnoreCase);
+
         static List<string> OPERATORS = new List<string>
         { "+", "-" , "*", "/"};
 
@@ -101,6 +106,41 @@ namespace BinaryParse
                     return 3;
             }
             return -1;
+        }
+
+        public static List<string> ExpressionParser(string input)
+        {
+            // remove empty space
+            input = input.Replace(" ", "");
+
+            if (input == null) return null;
+
+            List<string> result = new List<string>();
+
+            foreach (var match in Regex.Matches(input, @"([*+/\-)(])|([0-9.]+|.)"))
+            {
+                result.Add(match.ToString());
+            }
+            return result;
+        }
+        public static bool HasTwoParts(string expr)
+        {
+            return _hasTwoParts.IsMatch(expr);
+        }
+        public static string GetParent(string expr)
+        {
+            int splitIndex = Helper.RegexIndexOf(expr, _hasTwoParts.ToString());
+            return expr.Substring(splitIndex + 1, 1);
+        }
+        public static List<string> GetLeftChild(string expr)
+        {
+            int splitIndex = Helper.RegexIndexOf(expr, _hasTwoParts.ToString());
+            return ExpressionParser(expr.Substring(0, splitIndex + 1));
+        }
+        public static List<string> GetRightChild(string expr)
+        {
+            int splitIndex = Helper.RegexIndexOf(expr, _hasTwoParts.ToString());
+            return ExpressionParser(expr.Substring(splitIndex + 2, expr.Length - splitIndex - 2));
         }
     }
 }
