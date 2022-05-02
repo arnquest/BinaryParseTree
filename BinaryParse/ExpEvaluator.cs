@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace BinaryParse
@@ -61,7 +59,7 @@ namespace BinaryParse
                     operations.Push(e);   //push the current operator to stack
                 }
             }
-            while (operations.Count !=0)
+            while (operations.Count != 0)
             {
                 int output = performOperation(operands, operations);
                 operands.Push(output);   //push final result back to stack
