@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace BinaryParse
 {
@@ -11,7 +9,7 @@ namespace BinaryParse
         public List<string> ChildRight;
 
         public Expression()
-        { 
+        {
             this.Parent = "";
             this.ChildLeft = new List<string>();
             this.ChildRight = new List<string>();

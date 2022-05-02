@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace BinaryParse
 {
     // Import the extension method namespace.
     using CustomExteions;
-    using System.Reflection;
 
     /* 
     + 1. If the current token is a '(', add a new node as the left child of the current node, and descend to the left child.
@@ -27,7 +24,8 @@ namespace BinaryParse
         string rightParen = ")";
 
         private Node _root;
-        public Node Root {
+        public Node Root
+        {
             get { return _root; }
         }
         private int _count;
@@ -44,7 +42,7 @@ namespace BinaryParse
         }
         public bool ConstructTree(string expr)
         {
-            
+
             return true;
         }
     }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-/*Node is part of a tree, it can be sub node or main/root node*/
+﻿/*Node is part of a tree, it can be sub node or main/root node*/
 namespace BinaryParse
 {
     public class Node

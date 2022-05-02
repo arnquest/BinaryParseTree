@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using AngouriMath;
-using AngouriMath.Extensions;
-using System.Text.RegularExpressions;
-using System.Linq;
 
 namespace BinaryParse
 {
@@ -22,9 +18,9 @@ namespace BinaryParse
 
             TreeParser tree = new TreeParser();
             tree.ConstructTree(input);
-            
-            tree.Print();            
+
+            tree.Print();
         }
-        
+
     }
 }
