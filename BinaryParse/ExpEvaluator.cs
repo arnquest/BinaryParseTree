@@ -17,54 +17,67 @@ namespace BinaryParse
         static string rightParen = ")";
 
         /*
-         * Purpose: Find the value of math expression 
-        * Step 1: Create an operand stack.
-        * Step 2: If the character is an operand (0-9), push it to the operand stack.
-        * Step 3: If the character is an operator, pop two operands from the stack, operate and push the result back to the stack.
-        * Step 4: After the entire expression has been traversed, pop the final result from the stack.
+
         */
+        /// <summary>
+        /// Purpose: Find the value of math expression 
+        /// Step 1: Create an operand stack.
+        /// Step 2: If the character is an operand (0-9), push it to the operand stack.
+        /// Step 3: If the character is an operator, pop two operands from the stack, operate and push the result back to the stack.
+        /// Step 4: After the entire expression has been traversed, pop the final result from the stack.
+        /// </summary>
+        /// <param name="expr"></param>
+        /// <returns>result for the given expression</returns>
         public static int Evaluate(List<string> expr)
         {
-            Stack<int> operands = new Stack<int>(); // Operands stack (0-9)
-            Stack<string> operations = new Stack<string>();  //Operator stack 
+            try {
+                Stack<int> operands = new Stack<int>(); // Operands stack (0-9)
+                Stack<string> operations = new Stack<string>();  //Operator stack 
 
-            foreach (string e in expr)
-            {
-                if (Helper.IsNumeric(e))
+                foreach (string e in expr)
                 {
-                    operands.Push(Int32.Parse(e));
-                }
-                else if (e.Equals(leftParen))
-                {
-                    operations.Push(e);
-                }
-                //Closed parenthesis, evaluate the entire parenthesis
-                else if (e.Equals(rightParen))
-                {
-                    while (operations.Peek() != leftParen)
+                    if (Helper.IsNumeric(e))
                     {
-                        int output = performOperation(operands, operations);
-                        operands.Push(output);   //push result back to stack
+                        operands.Push(Int32.Parse(e));
                     }
-                    operations.Pop();
-                }
-                // current character is operator
-                else if (OPERATORS.Contains(e))
-                {
-                    while (operations.Count != 0 && precedence(e) <= precedence(operations.Peek()))
+                    else if (e.Equals(leftParen))
                     {
-                        int output = performOperation(operands, operations);
-                        operands.Push(output);   //push result back to stack
+                        operations.Push(e);
                     }
-                    operations.Push(e);   //push the current operator to stack
+                    //Closed parenthesis, evaluate the entire parenthesis
+                    else if (e.Equals(rightParen))
+                    {
+                        while (operations.Peek() != leftParen)
+                        {
+                            int output = performOperation(operands, operations);
+                            operands.Push(output);   //push result back to stack
+                        }
+                        operations.Pop();
+                    }
+                    // current character is operator
+                    else if (OPERATORS.Contains(e))
+                    {
+                        while (operations.Count != 0 && precedence(e) <= precedence(operations.Peek()))
+                        {
+                            int output = performOperation(operands, operations);
+                            operands.Push(output);   //push result back to stack
+                        }
+                        operations.Push(e);   //push the current operator to stack
+                    }
                 }
+                while (operations.Count != 0)
+                {
+                    int output = performOperation(operands, operations);
+                    operands.Push(output);   //push final result back to stack
+                }
+                return operands.Pop();
             }
-            while (operations.Count != 0)
-            {
-                int output = performOperation(operands, operations);
-                operands.Push(output);   //push final result back to stack
+            catch (Exception ex) 
+            { 
+                Console.WriteLine(ex.Message);
+                return 0;
             }
-            return operands.Pop();
+ 
         }
         public static int performOperation(Stack<int> operands, Stack<string> operations)
         {

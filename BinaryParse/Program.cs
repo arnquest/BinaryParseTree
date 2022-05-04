@@ -17,9 +17,12 @@ namespace BinaryParse
             Console.WriteLine("Answer for the expression is: " + ans.ToString());
 
             TreeParser tree = new TreeParser();
-            tree.ConstructTree(input);
+            if (tree.ConstructTree(input)) 
+            {
+                tree.Print();
+            }
 
-            tree.Print();
+            
         }
 
     }
