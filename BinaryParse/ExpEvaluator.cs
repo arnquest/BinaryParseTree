@@ -10,6 +10,7 @@ namespace BinaryParse
             new Regex("\\)\\*\\(|\\)\\+\\(|\\)-\\(|\\)/\\(",
              RegexOptions.IgnoreCase);
 
+
         static List<string> OPERATORS = new List<string>
         { "+", "-" , "*", "/"};
 
@@ -121,18 +122,44 @@ namespace BinaryParse
 
         public static List<string> ExpressionParser(string input)
         {
-            // remove empty space
-            input = input.Replace(" ", "");
-
-            if (input == null) return null;
-
-            List<string> result = new List<string>();
-
-            foreach (var match in Regex.Matches(input, @"([*+/\-)(])|([0-9.]+|.)"))
+            try
             {
-                result.Add(match.ToString());
+                if (input == null) return null;
+
+                // remove empty space
+                input = input.Replace(" ", "");
+
+                bool brackets = ContainsBrackets(input);
+                if (brackets == false)
+                {
+                    input = "(" + input + ")";
+                }
+
+                List<string> result = new List<string>();
+
+                foreach (var match in Regex.Matches(input, @"([*+/\-)(])|([0-9.]+|.)"))
+                {
+                    result.Add(match.ToString());
+                }
+                return result;
             }
-            return result;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+
+        }
+        public static bool ContainsBrackets(string expr)
+        {
+            if (expr.StartsWith(leftParen) && expr.EndsWith(rightParen))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public static bool HasTwoParts(string expr)
         {
